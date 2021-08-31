@@ -92,7 +92,7 @@ subSeq s xs
     | head s == head xs = subSeq (tail s) (tail xs)
     | otherwise = subSeq s ( tail xs )
 
-subWord :: String -> String -> Bool 
+subWord :: String -> String -> Bool
 
 subWord "" xs = True
 subWord s "" = False
@@ -100,7 +100,15 @@ subWord s xs
         | head s == head xs = exactmatch s xs
         | otherwise = subWord s (tail xs)
         where exactmatch s xs
-                    | s == take (length s) xs = True 
+                    | s == take (length s) xs = True
                     | otherwise = subWord s (tail xs)
 
 
+isMatrix :: [[a]] -> Bool
+isMatrix [] = False
+isMatrix [y]
+        | not ( null y) = True
+        | otherwise = False
+isMatrix x
+        | length (head x) == length (x!!1) = isMatrix $ tail x
+        | otherwise = False
