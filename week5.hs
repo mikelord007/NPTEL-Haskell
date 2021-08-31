@@ -90,5 +90,7 @@ subSeq s xs
         | null (f s xs) = True
         | otherwise = False
         where f "" xs = []
-              f s xs = foldl (\s e -> if head s == e then tail s else s) s xs
-             
+              f s "" = s
+              f s xs
+                    | head s == head xs = f (tail s) (tail xs)
+                    | otherwise = f s ( tail xs )
