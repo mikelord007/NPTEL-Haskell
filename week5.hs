@@ -86,11 +86,21 @@ multiplyMatrices [[1,2,3],[4,5,6]] [[1,2],[3,4],[5,6]] = [[22,28],[49,64]]
 
 
 subSeq :: String -> String -> Bool
+subSeq "" xs = True
+subSeq s "" = False
 subSeq s xs
-        | null (f s xs) = True
-        | otherwise = False
-        where f "" xs = []
-              f s "" = s
-              f s xs
-                    | head s == head xs = f (tail s) (tail xs)
-                    | otherwise = f s ( tail xs )
+    | head s == head xs = subSeq (tail s) (tail xs)
+    | otherwise = subSeq s ( tail xs )
+
+subWord :: String -> String -> Bool 
+
+subWord "" xs = True
+subWord s "" = False
+subWord s xs
+        | head s == head xs = exactmatch s xs
+        | otherwise = subWord s (tail xs)
+        where exactmatch s xs
+                    | s == take (length s) xs = True 
+                    | otherwise = subWord s (tail xs)
+
+
