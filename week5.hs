@@ -112,3 +112,9 @@ isMatrix [y]
 isMatrix x
         | length (head x) == length (x!!1) = isMatrix $ tail x
         | otherwise = False
+
+
+isSquareMatrix :: [[a]] -> Bool
+isSquareMatrix [] = False
+isSquareMatrix x = foldl k True x
+                    where k acc ele = acc && length ele == length x && not ( null ele)
