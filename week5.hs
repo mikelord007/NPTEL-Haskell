@@ -118,3 +118,18 @@ isSquareMatrix :: [[a]] -> Bool
 isSquareMatrix [] = False
 isSquareMatrix x = foldl k True x
                     where k acc ele = acc && length ele == length x && not ( null ele)
+
+
+addable :: [[a]] -> [[a]] -> Bool
+addable x y = isMatrix x && isMatrix y && length x == length y && length ( head x) == length ( head y)
+
+
+addMatrices :: [[Int]] -> [[Int]] -> [[Int]]
+addMatrices xs ys = [ [ xs!!i!!j + ys!!i!!j | j<-[ 0 .. length (xs!!i) - 1]] | i <- [0 .. length xs -1]]
+
+multiplyable :: [[a]] -> [[a]] -> Bool
+multiplyable xs ys = isMatrix xs && isMatrix ys && length ys == length (head xs)
+
+multiplyMatrices :: [[Int]] -> [[Int]] -> [[Int]]
+multiplyMatrices xs ys = [ [  k i j | j <- [0 .. length (head ys)-1]] | i <- [0 .. length xs - 1]]
+                                where k i j = sum [ xs!!i!!l * (ys!!l)!!j | l <- [0.. length (xs!!0)-1 ] ]
