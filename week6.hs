@@ -63,3 +63,14 @@ moreZeros x
               onenum x
                   | odd x = 1 + onenum (x `div` 2)
                   | otherwise = onenum ( x `div` 2)
+
+
+binToTer :: Int -> Int
+binToTer x = foldr k 0 (decToTer ( binToDec x 0))
+                 where k e acc = acc*10 + e  
+                       binToDec 0 _= 0
+                       binToDec x i = round (2**i) * (x `mod` 10) + binToDec (x `div` 10) (i+1)
+                       decToTer 1 = [1]
+                       decToTer 0 = [0]
+                       decToTer 2 = [2]
+                       decToTer x = x `mod` 3:decToTer (x `div` 3)
