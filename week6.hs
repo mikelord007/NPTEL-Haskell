@@ -74,3 +74,11 @@ binToTer x = foldr k 0 (decToTer ( binToDec x 0))
                        decToTer 0 = [0]
                        decToTer 2 = [2]
                        decToTer x = x `mod` 3:decToTer (x `div` 3)
+
+
+palindrome :: Int -> Bool
+palindrome x
+    |check x 0 == x = True
+    |otherwise  = False 
+        where check 0 rev = rev
+              check x rev = check (x `div` 10 ) (rev*10 + x `mod` 10)
